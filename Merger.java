@@ -28,6 +28,47 @@ public class Merger {
       , int nItems  // number of items in the merged list
                     // = just past end of list1
       ) {
+      //create a new ArrayList to avoid the in place merge
+      ArrayList<String> sortedData = new ArrayList<String>();
+      //copy over the useless data
+      for(int index = 0;
+          index < start0;
+          index++) {
+          sortedData.add(usersData.get(index));
+        }
+      //System.out.println("debugging: "" + sortedData);
+      //begin the merge sort
+      int index0, index1;
+      for(index0 = start0, index1 = start1;
+          (start1 - index0) * (nItems - index1) != 0; //checks if either list is empty
+          ) {
+          if(usersData.get(index0).compareTo(usersData.get(index1)) < 0) {
+            sortedData.add(usersData.get(index0++)); //deal()
+            //System.out.println("debug: list0 deals");
+          }else {
+            sortedData.add(usersData.get(index1++)); //deal()
+            //System.out.println("debug: list1 deals");
+          }
+      }
+      //System.out.println("debugging: " + sortedData);
+      //once one of the lists is empty, append the remaining portion of the other list
+      if(start1 - index0 == 0) {
+        //System.out.println("debug message: list0 remains");
+        while(nItems - index1 > 0) {
+          sortedData.add(usersData.get(index1++));
+        }
+      }else {
+        //System.out.println("debug message: list1 remains");
+        while(start1 - index0 > 0) {
+          sortedData.add(usersData.get(index0++));
+        }
+      }
+      //copy over any remaining useless data
+      while(usersData.size() > nItems) {
+        sortedData.add(usersData.get(nItems++));
+      }
+      //modify which object usersData refers to
+      usersData = sortedData;
     }
 
 
