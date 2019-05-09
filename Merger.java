@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 public class Merger {
 
-    ArrayList<String> usersData;
+    ArrayList<Card> usersData;
 
     /**
       Construct an instance from a list of data
       part of which is to be merged. See README
      */
-    public Merger( ArrayList<String> list) {
+    public Merger( ArrayList<Card> list) {
         usersData = list;
     }
 
@@ -29,7 +29,7 @@ public class Merger {
                     // = just past end of list1
       ) {
       //create a new ArrayList to avoid the in place merge
-      ArrayList<String> sortedData = new ArrayList<String>();
+      ArrayList<Card> sortedData = new ArrayList<Card>();
       //copy over the useless data
       for(int index = 0;
           index < start0;

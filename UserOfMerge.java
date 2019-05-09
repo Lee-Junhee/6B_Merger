@@ -7,22 +7,22 @@ import java.util.Arrays;
 public class UserOfMerge {
     
     public static void main(String[] commandLine) {
-        ArrayList< String> cards = new ArrayList< String>(
+        ArrayList< Card> cards = new ArrayList< Card>(
           /* Java's Arrays.asList provides a perspicuous
              way to build a Collection from literals,
              suitable for constructing an ArrayList */
           Arrays.asList(
               // data to be ignored; see README
-              "z", "y"  // descending order
+              new Card("z"), new Card("y")  // descending order
               
               // one sorted sub-list
-            , "4", "5", "6", "9"
+            , new Card("4"), new Card("5"), new Card("6"), new Card("9")
 
               // the other sorted sub-list
-            , "2", "3", "4", "6", "7", "J", "Q", "K"
+            , new Card("2"), new Card("3"), new Card("4"), new Card("6"), new Card("7"), new Card("J"), new Card("Q"), new Card("K")
             
               // more data to be ignored
-            , "-", "+", "*"  // descending order
+            , new Card("-"), new Card("+"), new Card("*")  // descending order
             ));
 
         oneTest( "card decks"
@@ -35,7 +35,7 @@ public class UserOfMerge {
      */
     private static void oneTest(
         String description
-      , ArrayList<String> mergeMe
+      , ArrayList<Card> mergeMe
         // indexes of sub-list boundaries; see README
       , int start0  // index of first item in list0
       , int start1  // index of first item in list1
