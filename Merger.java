@@ -29,13 +29,14 @@ public class Merger {
                     // = just past end of list1
       ) {
       //create a new ArrayList to avoid the in place merge
-      ArrayList<Card> sortedData = new ArrayList<Card>();
-      //copy over the useless data
+      //ArrayList<Card> usersData = new ArrayList<Card>();
+      ArrayList<Card> localCopy = new ArrayList<Card>(nItems - start0);
+/*       //copy over the useless data
       for(int index = 0;
           index < start0;
           index++) {
           sortedData.add(usersData.get(index));
-        }
+        } */
       //System.out.println("debugging: "" + sortedData);
       //begin the merge sort
       int index0, index1;
@@ -43,10 +44,12 @@ public class Merger {
           (start1 - index0) * (nItems - index1) != 0; //checks if either list is empty
           ) {
           if(usersData.get(index0).compareTo(usersData.get(index1)) < 0) {
-            sortedData.add(usersData.get(index0++)); //deal()
+            //sortedData.add(usersData.get(index0++)); //deal()
+            localCopy.add(usersData.get(index0++));
             //System.out.println("debug: list0 deals");
           }else {
-            sortedData.add(usersData.get(index1++)); //deal()
+            //sortedData.add(usersData.get(index1++)); //deal()
+            localCopy.add(usersData.get(index1++));
             //System.out.println("debug: list1 deals");
           }
       }
@@ -55,20 +58,28 @@ public class Merger {
       if(start1 - index0 == 0) {
         //System.out.println("debug message: list0 remains");
         while(nItems - index1 > 0) {
-          sortedData.add(usersData.get(index1++));
+          //sortedData.add(usersData.get(index1++));
+          localCopy.add(usersData.get(index1++));
         }
       }else {
         //System.out.println("debug message: list1 remains");
         while(start1 - index0 > 0) {
-          sortedData.add(usersData.get(index0++));
+          // sortedData.add(usersData.get(index0++));
+          localCopy.add(usersData.get(index0++));
         }
       }
-      //copy over any remaining useless data
+      /* //copy over any remaining useless data
       while(usersData.size() > nItems) {
         sortedData.add(usersData.get(nItems++));
-      }
+      } */
       //modify which object usersData refers to
-      usersData = sortedData;
+      // usersData = sortedData;
+      //copy over sorted date from local copy
+      for(int index = 0;
+          index < nItems - start0;
+          index++) {
+            usersData.set(index + start0, localCopy.get(index));
+          }
     }
 
 
